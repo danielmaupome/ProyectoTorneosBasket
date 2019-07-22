@@ -24,7 +24,7 @@
     </dependencies>
 
     <build>
-        <directory>/Volumes/Compilaciones/TorneoBasquetball</directory>
+        <!--<directory>/Volumes/Compilaciones/TorneoBasquetball</directory>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
