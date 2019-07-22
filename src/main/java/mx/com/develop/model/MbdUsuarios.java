@@ -70,7 +70,7 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
 
         Usuario usuario = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE idUsuario= ? AND estadoDeRegistro = 1");
+            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE idUsuario= ?");
             ps.setInt(1, idUsuario);
             rst = ps.executeQuery();
             if (rst.next()) {
@@ -97,7 +97,7 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
 
         Usuario usuario = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE login= ? AND password= ? AND estadoDeRegistro = 1");
+            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE login= ? AND password= ?");
             ps.setString(1, login);
             ps.setString(2, password);
             rst = ps.executeQuery();
@@ -129,7 +129,7 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
 
         try {
 
-            rst = stmt.executeQuery("SELECT * FROM usuarios WHERE estadoDeRegistro = 1 ORDER BY nombre");
+            rst = stmt.executeQuery("SELECT * FROM usuarios ORDER BY nombre");
             while (rst.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rst.getInt(1));
