@@ -22,12 +22,6 @@ public class Mbd {
         conn = ds.getConnection();
     }
 
-    public void getConexionMonex() throws NamingException, SQLException {
-        ctx = new InitialContext();
-        ds = (DataSource) ctx.lookup("dcorp.DSDCorpTransaccional");
-        conn = ds.getConnection();
-    }
-
     public void returnConexion(Connection conn, PreparedStatement ps, ResultSet rst, Statement stmt) {
         try {
             if (rst != null) {
