@@ -1,6 +1,6 @@
 <%-- 
     Document   : prueba
-    Created on : 22/07/2019, 03:14:15 PM
+    Created on : 22/07/2019, 03:17:40 PM
     Author     : abiga
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>hola mundo</h1>
     </body>
 </html>
