@@ -6,8 +6,7 @@
 
 <%@page import="mx.com.develop.objects.Usuario"%>
 <%@page import="mx.com.develop.model.MbdUsuarios"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
     String nombre = request.getParameter("nombre");
     String login = request.getParameter("login");
@@ -21,15 +20,11 @@
     usuario.setEmail(email);
     boolean exito = new MbdUsuarios().insertaUsuario(usuario);
 %>
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Se ha agregado un usuario</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <%@ include file="menu.jsp" %>
         <%if(exito){%>
         <div class="jumbotron">
             <h1>Se ha agregado un usuario</h1>
@@ -41,9 +36,9 @@
         </div>
         <%}else{%>
         <div class="jumbotron">
-            <h1>OcurriÃ³ un error al agregar el usuario</h1>
+            <h1>Ocurrió un error al agregar el usuario</h1>
             <p><a class="btn btn-primary btn-lg" href="usuarios.jsp" role="button">Regresar</a></p>
         </div>
         <%}%>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

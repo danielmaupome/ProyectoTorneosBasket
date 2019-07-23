@@ -4,15 +4,12 @@
     Author     : Cesar
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar Usuario - TODO</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <%@ include file="menu.jsp" %>
         <p>&nbsp;</p>
         <div id="container" class="container">
             <form action="agregarUsuarioDo.jsp" method="POST">
@@ -32,8 +29,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" 
-                        pattern="(?=.*\d).{6,}" title="Debe contener 6 o mas caracteres, y al menos un numero" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                 </div>
 
@@ -46,5 +42,5 @@
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

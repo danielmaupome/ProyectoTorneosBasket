@@ -4,32 +4,29 @@
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.objects.Usuario"%>
-<%@page import="mx.com.develop.model.MbdJugador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="mx.com.develop.objects.Jugador"%>
+<%@page import="mx.com.develop.model.MbdJugadores"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String idJugador = request.getParameter("idJugador");
+    String pIdJugador = request.getParameter("idJugador");
+    int idJugador = Integer.parseInt(pIdJugador);
+    Jugador jugador = new MbdJugadores().buscaJugador(idJugador);
     
-    boolean exito = new MbdJugador().eliminaJugador(Integer.parseInt(idJugador));
+    new MbdJugadores().eliminaJugador(idJugador);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Se ha eliminado un jugador</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <%if(exito){%>
+        <%@ include file="menu.jsp" %>
         <div class="jumbotron">
             <h1>Se ha eliminado un jugador</h1>
+            <p>&nbsp;</p>
+            <p><b>Nombre:</b> <%=jugador.getNombre()%></p>
+            <p><b>Direccion</b> <%=jugador.getDireccion()%></p>
+            <p><b>Foto:</b> <%=jugador.getFoto()%></p>
+            <p><b>Fecha de nacimiento:</b> <%=jugador.getFechaDeNacimiento()%></p>
             <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
         </div>
-        <%}else{%>
-        <div class="jumbotron">
-            <h1>Ocurrió un error al eliminar el jugador</h1>
-            <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
-        </div>
-        <%}%>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

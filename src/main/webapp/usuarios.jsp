@@ -4,22 +4,19 @@
     Author     : Cesar
 --%>
 
-<%@page import="java.util.List"%>
 <%@page import="mx.com.develop.model.MbdUsuarios"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="mx.com.develop.objects.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    List<Usuario> listaUsuarios = new MbdUsuarios().traerTodosLosUsuarios();
+    ArrayList<Usuario> listaUsuarios = new MbdUsuarios().traerTodosLosUsuarios();
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de usuarios</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <jsp:include page="menu.jsp"/>
+        <title>Administración de usuarios</title>
+        <%@ include file="menu.jsp" %>
+        <h2>Administración de usuarios</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -28,6 +25,8 @@
                     <th scope="col">Login</th>
                     <th scope="col">Password</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,8 +43,16 @@
                 <%}%>
             </tbody>
             <tfoot>
-                <p><a class="btn btn-primary btn-lg" href="agregarUsuarioForm.jsp" role="button">Agregar Usuario</a></p>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><p><a class="btn btn-primary btn-lg" href="agregarUsuarioForm.jsp" role="button">Agregar</a></p></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
             </tfoot>
         </table>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

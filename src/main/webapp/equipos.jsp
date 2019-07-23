@@ -4,22 +4,22 @@
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.model.MbdEquipo"%>
+<%@page import="java.util.ResourceBundle"%>
+<%@page import="java.io.File"%>
+<%@page import="mx.com.develop.tools.ImageTools"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
-<%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    List<Equipo> lista = new MbdEquipo().traerTodosLosEquipos();
+    ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
+    String uploadFolder = ResourceBundle.getBundle("mx.com.develop.properties.rutas").getString("rutaArchivos");
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista de equipos</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <jsp:include page="menu.jsp"/>
+        <%@ include file="menu.jsp" %>
         <table class="table">
             <thead>
                 <tr>
@@ -27,25 +27,35 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Logotipo</th>
                     <th scope="col">Color</th>
-                    <th scope="col">Secundario</th>
                 </tr>
             </thead>
             <tbody>
-                <%for (Equipo equipo : lista) {%>
+                <%for(Equipo equipo : listaEquipos){
+                File archivoImagen=new File(uploadFolder+equipo.getLogotipo());
+                %>
                 <tr>
                     <th scope="row"><%=equipo.getIdEquipo()%></th>
                     <td><%=equipo.getNombre()%></td>
-                    <td><img src="../images/<%=equipo.getLogotipo()%>" alt="<%=equipo.getLogotipo()%>" width="50" height="50"></td>
-                    <td> <input class="jscolor form-control" value="<%=equipo.getColorPrimario()%>" disabled></td>
-                    <td> <input class="jscolor form-control" value="<%=equipo.getColorSecundario()%>" disabled></td>
+                    <td><img style="display:block; width:auto;height:100px;" src="<%=ImageTools.encodeFileToBase64Binary(archivoImagen)%>" /></td>
+                    <td><div style="height:100px; width:100px; overflow:hidden; background-color:<%=equipo.getColorPrimario()%>;">
+                            <div style="width:0; height:0; border-top:100px solid <%=equipo.getColorSecundario()%>; border-right:100px solid transparent;"></div>
+                        </div>
+                    </td>
                     <td><a class="btn btn-primary btn-lg" href="modificarEquipoForm.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Modificar</a></td>
                     <td><a class="btn btn-primary btn-lg" href="eliminarEquipoDo.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Eliminar</a></td>
                 </tr>
                 <%}%>
             </tbody>
             <tfoot>
-            <p><a class="btn btn-primary btn-lg" href="agregarEquipoForm.jsp" role="button">Agregar Equipo</a></p>
-        </tfoot>
-    </table>
-</body>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><p><a class="btn btn-primary btn-lg" href="agregarEquipoForm.jsp" role="button">Agregar</a></p></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+        <%@ include file="base.jsp" %>
 </html>

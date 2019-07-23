@@ -1,104 +1,83 @@
 <%-- 
-    Document   : agregarEquipoForm
+    Document   : modificarPartidoForm
     Created on : 25/06/2019, 03:26:33 PM
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.model.MbdPartido"%>
-<%@page import="mx.com.develop.objects.Partido"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="mx.com.develop.model.MbdEquipo"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="mx.com.develop.model.MbdPartidos"%>
+<%@page import="mx.com.develop.objects.Partido"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String pIdUsuario = request.getParameter("idPartido");
-    int idPartido = Integer.parseInt(pIdUsuario);
+    String pIdPartido = request.getParameter("idPartido");
+    int idPartido = Integer.parseInt(pIdPartido);
 
-    Partido partido = new MbdPartido().buscaPartido(idPartido);
-    List<Equipo> equipos = new MbdEquipo().traerTodosLosEquipos();
+    Partido partido = new MbdPartidos().buscaPartido(idPartido);
+    ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modificar Partido - TODO</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <%@ include file="menu.jsp" %>
         <p>&nbsp;</p>
         <div id="container" class="container">
             <form action="modificarPartidoDo.jsp?idPartido=<%=partido.getIdPartido()%>" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="idEquipo">Equipo Local:</label>
-                        <select name="equipo_local">
-                            <%
-                                for (Equipo equipo : equipos) {
-                                    out.print("<option value=\"");
-                                    out.print(equipo.getIdEquipo());
-                                    if (partido.getEquipoLocal() == equipo.getIdEquipo()) {
-                                        out.print("\" selected>");
-                                    } else {
-                                        out.print("\">");
-                                    }
-                                    out.print(equipo.getNombre());
-                                    out.print("</option>");
-                                }
-                            %>
-                        </select> 
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="idEquipo">Equipo Visitante:</label>
-                        <select name="equipo_visitante">
-                            <%
-                                for (Equipo equipo : equipos) {
-                                    out.print("<option value=\"");
-                                    out.print(equipo.getIdEquipo());
-                                    if (partido.getEquipoVisitante() == equipo.getIdEquipo()) {
-                                        out.print("\" selected>");
-                                    } else {
-                                        out.print("\">");
-                                    }
-                                    out.print(equipo.getNombre());
-                                    out.print("</option>");
-                                }
-                            %>
-                        </select> 
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="login">Marcador Local:</label>
-                        <input type="text" class="form-control" id="nombre" name="marcador_local" placeholder="Numero" value="<%= partido.getMarcadorLocal()%>">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="direccion">Marcado visitante:</label>
-                        <input type="text" class="form-control" id="direccion" name="marcador_visitante" placeholder="Numero" value="<%= partido.getMarcadorVisitante()%>">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="foto">Estado:</label>
-                        <select name="estado">
-                            <option value="1">Perdido</option>
-                            <option value="2">Ganado</option>
-                            <option value="3">Jugado</option>
-                            <option value="4" selected>No jugado</option>
+                        <label for="equipoLocal">Equipo Local</label>
+                        <select class="form-control" id="equipoLocal" name="equipoLocal">
+                            <%for (Equipo equipo : listaEquipos) {%>
+                            <option value="<%=equipo.getIdEquipo()%>" <%if (equipo.getIdEquipo() == partido.getEquipoLocal()) {%>selected<%}%>><%=equipo.getNombre()%></option>
+                            <%}%>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="fecha_nacimiento">Fecha del partido</label>
-                        <input id="dtp1" type="date" class="form-control" data-format="dd/MM/yyyy hh:mm" id="fecha_nacimiento" name="fecha" placeholder="Fecha del partido" value="<%=partido.getFecha()%>">
+                        <label for="marcadorLocal">Marcador Local:</label>
+                        <input type="text" class="form-control" id="marcadorLocal" name="marcadorLocal" placeholder="Marcador Local" value="<%=partido.getMarcadorLocal()%>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="equipoVisitante">Equipo Visitante</label>
+                        <select class="form-control" id="equipoVisitante" name="equipoVisitante">
+                            <%for (Equipo equipo : listaEquipos) {%>
+                            <option value="<%=equipo.getIdEquipo()%>" <%if (equipo.getIdEquipo() == partido.getEquipoVisitante()) {%>selected<%}%>><%=equipo.getNombre()%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="marcadorLocal">Marcador Visitante:</label>
+                        <input type="text" class="form-control" id="marcadorVisitante" name="marcadorVisitante" placeholder="Marcador Visitante" value="<%=partido.getMarcadorVisitante()%>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="estatus">Estatus</label>
+                        <select class="form-control" id="estatus" name="estatus">
+                            <option value="1" <%if (partido.getEstatus() == 1) {%>selected<%}%>>Pendiente</option>
+                            <option value="2" <%if (partido.getEstatus() == 2) {%>selected<%}%>>Jugado</option>
+                            <option value="3" <%if (partido.getEstatus() == 3) {%>selected<%}%>>Default Local</option>
+                            <option value="4" <%if (partido.getEstatus() == 4) {%>selected<%}%>>Default Visitante</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fecha">Fecha:</label>
+                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="Fecha" value="<%=formatoFecha.format(partido.getFecha())%>">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

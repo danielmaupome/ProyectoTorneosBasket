@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Cesar
  */
 public class Partido {
-
     private int idPartido;
     private int equipoLocal;
     private int equipoVisitante;
@@ -76,5 +75,5 @@ public class Partido {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
+    
 }

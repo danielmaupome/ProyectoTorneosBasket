@@ -5,84 +5,62 @@
  */
 package mx.com.develop.filter;
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import mx.com.develop.model.MbdUsuarios;
-import mx.com.develop.objects.Usuario;
-import mx.com.develop.objects.Bitacora;
-import mx.com.develop.model.MbdBitacora;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import mx.com.develop.model.MbdBitacora;
+import mx.com.develop.objects.Bitacora;
+import mx.com.develop.objects.Usuario;
 
 /**
  *
- * @author Luis_Lopez
+ * @author Cesar
  */
-public class BitacoraFilter implements Filter {
+public class BitacoraFilter implements Filter{
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chainObj) throws IOException, ServletException {
-
-        final HttpServletRequest req = (HttpServletRequest) request;
-        final HttpServletResponse res = (HttpServletResponse) response;
-        final String requestUri = req.getRequestURI();
-        
-        if (requestUri != null) {
-            HttpSession session = req.getSession();
-            System.out.println("REQUEST_URI: " + requestUri);
-            Usuario usuario;
-            try {
-                usuario = (Usuario)session.getAttribute("usuarioEnSesion");
-                if(usuario == null){
-                    
-                    String login = request.getParameter("login");
-                    String password = request.getParameter("password");
-                    usuario = new MbdUsuarios().buscaUsuario(login, password);
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        if(httpRequest!=null){
+            HttpSession session = httpRequest.getSession();
+            if(session!=null){
+                Usuario usuario = (Usuario) session.getAttribute("usuarioEnSesion");
+                if(usuario!=null){
+                    Timestamp fecha = new Timestamp(System.currentTimeMillis());
+                    Bitacora bitacora = new Bitacora();
+                    bitacora.setIdUsuario(usuario.getIdUsuario());
+                    bitacora.setURL(httpRequest.getRequestURI());
+                    bitacora.setFecha(fecha);
+                    try {
+                        boolean exito = new MbdBitacora().insertaBitacora(bitacora);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(BitacoraFilter.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (NamingException ex) {
+                        Logger.getLogger(BitacoraFilter.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                if (usuario != null) {
-                int idUsuario = usuario.getIdUsuario();
-
-                Timestamp fecha1 = new Timestamp(System.currentTimeMillis());
-                //java.util.Date fecha = formatter.parse(fecha1);
-
-                Bitacora bitacora = new Bitacora();
-                bitacora.setIdUsuario(idUsuario);
-                bitacora.setUrl(requestUri.substring(18));
-                bitacora.setFecha(fecha1);
-                boolean exito = new MbdBitacora().insertaBitacora(bitacora);
-
-            } else {
-                System.out.println("Usuario no existe");
             }
-            } catch (SQLException ex) {
-                Logger.getLogger(BitacoraFilter.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NamingException ex) {
-                Logger.getLogger(BitacoraFilter.class.getName()).log(Level.SEVERE, null, ex);
-            }           
         }
-        chainObj.doFilter(request, response);
+        chain.doFilter(request, response);
     }
 
+    @Override
     public void destroy() {
     }
-
+    
 }

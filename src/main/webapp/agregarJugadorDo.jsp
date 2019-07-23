@@ -4,48 +4,49 @@
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.model.MbdEquipo"%>
-<%@page import="java.util.List"%>
-<%@page import="mx.com.develop.objects.Equipo"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="mx.com.develop.model.MbdJugador"%>
+<%@page import="java.util.Date"%>
+<%@page import="mx.com.develop.model.MbdJugadores"%>
 <%@page import="mx.com.develop.objects.Jugador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String nombre = request.getParameter("nombre");
     String direccion = request.getParameter("direccion");
     String foto = request.getParameter("foto");
-    String fechaNacimiento = request.getParameter("fecha_nacimiento");
-    Integer idEquipo = Integer.parseInt(request.getParameter("idEquipo"));
-
+    String fecha_nacimiento = request.getParameter("fecha_nacimiento");
+    String pIdEquipo = request.getParameter("idEquipo");
+    int idEquipo = Integer.parseInt(pIdEquipo);
+    
     Jugador jugador = new Jugador();
+    jugador.setIdEquipo(idEquipo);
     jugador.setNombre(nombre);
     jugador.setDireccion(direccion);
     jugador.setFoto(foto);
-    jugador.setFechaDeNacimiento(sdf.parse(fechaNacimiento));
-    jugador.setIdEquipo(idEquipo);
+    Date dateNacimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_nacimiento);
+    jugador.setFechaDeNacimiento(dateNacimiento);
 
-    Equipo equipo = new MbdEquipo().traerEquipo(idEquipo);
-    new MbdJugador().insertaJugador(jugador);
+    boolean exito = new MbdJugadores().insertaJugador(jugador);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Se ha agregado un jugador</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <%@ include file="menu.jsp" %>
+        <%if(exito){%>
         <div class="jumbotron">
             <h1>Se ha agregado un jugador</h1>
             <p>&nbsp;</p>
             <p><b>Nombre:</b> <%=nombre%></p>
             <p><b>Direccion</b> <%=direccion%></p>
             <p><b>Foto:</b> <%=foto%></p>
-            <p><b>Fecha de nacimiento:</b> <%=fechaNacimiento%></p>
-            <p><b>Equipo:</b> <%=equipo.getNombre()%></p>
+            <p><b>Fecha de nacimiento:</b> <%=fecha_nacimiento%></p>
             <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
         </div>
-    </body>
+        <%}else{%>
+        <div class="jumbotron">
+            <h1>Ocurrió un error al agregar el jugador</h1>
+            <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
+        </div>
+        <%}%>
+        <%@ include file="base.jsp" %>
 </html>

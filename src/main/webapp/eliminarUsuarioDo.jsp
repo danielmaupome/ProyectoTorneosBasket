@@ -6,30 +6,26 @@
 
 <%@page import="mx.com.develop.objects.Usuario"%>
 <%@page import="mx.com.develop.model.MbdUsuarios"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String idUsuario = request.getParameter("idUsuario");
+    String pIdUsuario = request.getParameter("idUsuario");
+    int idUsuario = Integer.parseInt(pIdUsuario);
+    Usuario usuario = new MbdUsuarios().buscaUsuario(idUsuario);
     
-    boolean exito = new MbdUsuarios().eliminaUsuario(Integer.parseInt(idUsuario));
+    new MbdUsuarios().eliminaUsuario(idUsuario);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Se ha modificado un usuario</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <%if(exito){%>
+        <title>Se ha eliminado un usuario</title>
+        <%@ include file="menu.jsp" %>
         <div class="jumbotron">
             <h1>Se ha eliminado un usuario</h1>
+            <p>&nbsp;</p>
+            <p><b>Nombre:</b> <%=usuario.getNombre()%></p>
+            <p><b>Login:</b> <%=usuario.getLogin()%></p>
+            <p><b>Correo:</b> <%=usuario.getEmail()%></p>
             <p><a class="btn btn-primary btn-lg" href="usuarios.jsp" role="button">Regresar</a></p>
         </div>
-        <%}else{%>
-        <div class="jumbotron">
-            <h1>Ocurrió un error al eliminar el usuario</h1>
-            <p><a class="btn btn-primary btn-lg" href="usuarios.jsp" role="button">Regresar</a></p>
-        </div>
-        <%}%>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

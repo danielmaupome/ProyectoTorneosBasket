@@ -5,6 +5,7 @@
  */
 package mx.com.develop.objects;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -14,8 +15,8 @@ import java.util.Date;
 public class Bitacora {
     private int idBitacora;
     private int idUsuario;
-    private String url;
-    private Date fecha;
+    private String URL;
+    private Timestamp fecha;
 
     public int getIdBitacora() {
         return idBitacora;
@@ -32,20 +33,20 @@ public class Bitacora {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
-    public String getUrl() {
-        return url;
+
+    public String getURL() {
+        return URL;
     }
 
-    public void setUrl(String descripcion) {
-        this.url = descripcion;
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
-    public Date getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
     

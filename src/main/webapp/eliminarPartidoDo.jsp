@@ -4,32 +4,32 @@
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.objects.Usuario"%>
-<%@page import="mx.com.develop.model.MbdJugador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Hashtable"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
+<%@page import="mx.com.develop.objects.Equipo"%>
+<%@page import="mx.com.develop.objects.Partido"%>
+<%@page import="mx.com.develop.model.MbdPartidos"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String idJugador = request.getParameter("idJugador");
+    String pIdPartido = request.getParameter("idPartido");
+    int idPartido = Integer.parseInt(pIdPartido);
+    Partido partido = new MbdPartidos().buscaPartido(idPartido);
     
-    boolean exito = new MbdJugador().eliminaJugador(Integer.parseInt(idJugador));
+    new MbdPartidos().eliminaPartido(idPartido);
+    
+    Hashtable<Integer, Equipo> equipos = new MbdEquipos().getEquipos();
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Se ha eliminado un jugador</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <%if(exito){%>
+        <title>Se ha eliminado un partido</title>
+        <%@ include file="menu.jsp" %>
         <div class="jumbotron">
-            <h1>Se ha eliminado un jugador</h1>
-            <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
+            <h1>Se ha eliminado un partido</h1>
+            <p>&nbsp;</p>
+            <p><b><%=equipos.get(partido.getEquipoLocal()).getNombre()%></b> <%=partido.getMarcadorLocal()%> - <%=partido.getMarcadorVisitante()%> <b><%=equipos.get(partido.getEquipoVisitante()).getNombre()%></b></p>
+            <p><b>Fecha:</b> <%=partido.getFecha()%></p>
+            <p><a class="btn btn-primary btn-lg" href="partidos.jsp" role="button">Regresar</a></p>
         </div>
-        <%}else{%>
-        <div class="jumbotron">
-            <h1>Ocurrió un error al eliminar el jugador</h1>
-            <p><a class="btn btn-primary btn-lg" href="jugadores.jsp" role="button">Regresar</a></p>
-        </div>
-        <%}%>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

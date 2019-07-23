@@ -4,22 +4,18 @@
     Author     : Cesar
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="mx.com.develop.model.MbdEquipo"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
-<%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    List<Equipo> equipos = new MbdEquipo().traerTodosLosEquipos();
+    ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar Usuario - TODO</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <%@ include file="menu.jsp" %>
         <p>&nbsp;</p>
         <div id="container" class="container">
             <form action="agregarJugadorDo.jsp" method="POST">
@@ -31,15 +27,14 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="direccion">DirecciÃ³n:</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="DirecciÃ³n">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="foto">Fotografia:</label>
-                        <input type="file" class="form-control" id="foto" name="foto" 
-                        accept="image/png, .jpeg, .jpg, image/gif"placeholder="Fotografia">
+                        <label for="foto">Fotografía:</label>
+                        <input type="file" class="form-control" id="foto" name="foto" placeholder="Fotografía">
                     </div>
                 </div>
                 <div class="form-row">
@@ -50,22 +45,16 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="idEquipo">Equipo:</label>
-                        <select name="idEquipo">
-                            <%
-                                for (Equipo equipo : equipos) {
-                                    out.print("<option value=\"");
-                                    out.print(equipo.getIdEquipo());
-                                    out.print("\">");
-                                    out.print(equipo.getNombre());
-                                    out.print("</option>");
-                                }
-                            %>
-                        </select> 
+                        <label for="idEquipo">Equipo</label>
+                        <select class="form-control" id="idEquipo" name="idEquipo">
+                            <%for(Equipo equipo : listaEquipos){%>
+                            <option value="<%=equipo.getIdEquipo()%>"><%=equipo.getNombre()%></option>
+                            <%}%>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

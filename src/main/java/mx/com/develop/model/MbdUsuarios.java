@@ -1,13 +1,12 @@
 package mx.com.develop.model;
 
+import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.*;
 import javax.naming.NamingException;
 import mx.com.develop.objects.Usuario;
 
-public class MbdUsuarios extends Mbd implements java.io.Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class MbdUsuarios extends Mbd {
 
     public MbdUsuarios() {
         super();
@@ -22,37 +21,13 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
         boolean exito = false;
         try {
 
-            ps = conn.prepareStatement("INSERT INTO usuarios(nombre,login,password,email) VALUES(?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO usuario (nombre,login,password,email) VALUES(?,?,?,?)");
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getLogin());
             ps.setString(3, usuario.getPassword());
             ps.setString(4, usuario.getEmail());
-            exito = ps.execute();
-        } catch (SQLException e) {
-            System.out.println("Error en sql: ");
-            throw e;
-        } finally {
-            returnConexion(conn, ps, rst, stmt);
-        }
-        return exito;
-    }
-
-    public boolean actualizarUsuario(Usuario usuario) throws SQLException,
-            NamingException {
-        getConexion();
-
-        stmt = conn.createStatement();
-
-        boolean exito = false;
-        try {
-            
-            ps = conn.prepareStatement("UPDATE equipos SET nombre = ?, logotipo = ?, color_primario = ?, color_secundario = ? WHERE idEquipo = ?");
-            ps.setString(1, usuario.getNombre());
-            ps.setString(2, usuario.getLogin());
-            ps.setString(3, usuario.getPassword());
-            ps.setString(4, usuario.getEmail());
-            ps.setInt(5, usuario.getIdUsuario());
-            exito = ps.execute();
+            ps.executeUpdate();
+            exito = true;
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
             throw e;
@@ -70,7 +45,7 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
 
         Usuario usuario = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE idUsuario= ?");
+            ps = conn.prepareStatement("SELECT * FROM usuario WHERE idUsuario=?");
             ps.setInt(1, idUsuario);
             rst = ps.executeQuery();
             if (rst.next()) {
@@ -97,7 +72,7 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
 
         Usuario usuario = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM usuarios WHERE login= ? AND password= ?");
+            ps = conn.prepareStatement("SELECT * FROM usuario WHERE login=? AND password=?");
             ps.setString(1, login);
             ps.setString(2, password);
             rst = ps.executeQuery();
@@ -119,17 +94,18 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
         return usuario;
     }
 
-    public List<Usuario> traerTodosLosUsuarios() throws SQLException,
+    public ArrayList<Usuario> traerTodosLosUsuarios() throws SQLException,
             NamingException {
         getConexion();
 
         stmt = conn.createStatement();
 
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
         try {
 
-            rst = stmt.executeQuery("SELECT * FROM usuarios ORDER BY nombre");
+            ps = conn.prepareStatement("SELECT * FROM usuario ORDER BY nombre");
+            rst = ps.executeQuery();
             while (rst.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rst.getInt(1));
@@ -148,21 +124,49 @@ public class MbdUsuarios extends Mbd implements java.io.Serializable {
         return usuarios;
     }
 
-    public boolean eliminaUsuario(int idUsuario) throws SQLException,
+    public void eliminaUsuario(int idUsuario) throws SQLException,
             NamingException {
         getConexion();
         stmt = conn.createStatement();
 
         try {
-            ps = conn.prepareStatement("DELETE FROM usuarios WHERE idUsuario = ?");
+            ps = conn.prepareStatement("DELETE FROM usuario WHERE idUsuario=" + idUsuario);
             ps.setInt(1, idUsuario);
-            return ps.execute();
+            ps.executeUpdate();
+
         } catch (Exception e) {
             System.out.println("Error en sql: ");
-            return false;
+
         } finally {
             returnConexion(conn, ps, rst, stmt);
         }
+    }
+
+    public boolean actualizaUsuario(Usuario usuario) throws SQLException,
+            NamingException {
+        getConexion();
+
+        stmt = conn.createStatement();
+
+        boolean exito = false;
+        try {
+
+            ps = conn.prepareStatement("update usuario set  nombre=?, login=?,"
+                    + "password=?,email=? where idUsuario=?");
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getLogin());
+            ps.setString(3, usuario.getPassword());
+            ps.setString(4, usuario.getEmail());
+            ps.setInt(5, usuario.getIdUsuario());
+            ps.executeUpdate();
+            exito = true;
+        } catch (SQLException e) {
+            System.out.println("Error en sql: ");
+            throw e;
+        } finally {
+            returnConexion(conn, ps, rst, stmt);
+        }
+        return exito;
     }
 
 }

@@ -13,11 +13,11 @@ import java.util.Date;
  */
 public class Jugador {
     private int idJugador;
-    private int idEquipo;
     private String nombre;
     private String direccion;
     private Date fechaDeNacimiento;
     private String foto;
+    private int idEquipo;
 
     public int getIdJugador() {
         return idJugador;
@@ -27,14 +27,6 @@ public class Jugador {
         this.idJugador = idJugador;
     }
 
-    public int getIdEquipo() {
-        return idEquipo;
-    }
-
-    public void setIdEquipo(int idEquipo) {
-        this.idEquipo = idEquipo;
-    }
-    
     public String getNombre() {
         return nombre;
     }
@@ -66,6 +58,15 @@ public class Jugador {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public int getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(int idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+    
     
     
 }

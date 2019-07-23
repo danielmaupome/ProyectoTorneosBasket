@@ -1,19 +1,15 @@
 package mx.com.develop.model;
 
+import java.rmi.RemoteException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.naming.NamingException;
 import mx.com.develop.objects.Jugador;
 
-public class MbdJugador extends Mbd implements java.io.Serializable {
+public class MbdJugadores extends Mbd {
 
-    public final static long serialVersionUID = 977748269724798214L;
-    private final SimpleDateFormat sdf;
-
-    public MbdJugador() {
+    public MbdJugadores() {
         super();
-        sdf = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public boolean insertaJugador(Jugador jugador) throws SQLException,
@@ -24,37 +20,16 @@ public class MbdJugador extends Mbd implements java.io.Serializable {
 
         boolean exito = false;
         try {
-            ps = conn.prepareStatement("INSERT INTO jugadores VALUES(?,?,?,?,?)");
-            ps.setInt(1, jugador.getIdEquipo());
-            ps.setString(2, jugador.getNombre());
-            ps.setString(3, jugador.getDireccion());
-            ps.setDate(4, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
-            ps.setString(5, jugador.getFoto());
-            exito = ps.execute();
-        } catch (SQLException e) {
-            System.out.println("Error en sql: ");
-            throw e;
-        } finally {
-            returnConexion(conn, ps, rst, stmt);
-        }
-        return exito;
-    }
 
-    public boolean actualizarJugador(Jugador jugador) throws SQLException,
-            NamingException {
-        getConexion();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
-        stmt = conn.createStatement();
-
-        boolean exito = false;
-        try {
-            ps = conn.prepareStatement("UPDATE jugadores SET idEquipo = ?, nombre = ?, direccion = ?, foto = ?, fecha_nacimiento = ? WHERE idJugador = ?");
-            ps.setInt(1, jugador.getIdEquipo());
-            ps.setString(2, jugador.getNombre());
-            ps.setString(3, jugador.getDireccion());
-            ps.setDate(4, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
-            ps.setString(5, jugador.getFoto());
-            exito = ps.execute();
+            ps = conn.prepareStatement("INSERT INTO jugador (nombre,direccion,fecha_nacimiento,foto,idEquipo) VALUES(?,?,?,?)");
+            ps.setString(1, jugador.getNombre());
+            ps.setString(2, jugador.getDireccion());
+            ps.setDate(3, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
+            ps.setString(4, jugador.getFoto());
+            ps.executeUpdate();
+            exito = true;
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
             throw e;
@@ -72,7 +47,7 @@ public class MbdJugador extends Mbd implements java.io.Serializable {
 
         Jugador jugador = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM jugadores WHERE idJugador = ?");
+            ps = conn.prepareStatement("SELECT * FROM jugador WHERE idJugador=?");
             ps.setInt(1, idJugador);
             rst = ps.executeQuery();
             if (rst.next()) {
@@ -93,17 +68,18 @@ public class MbdJugador extends Mbd implements java.io.Serializable {
         return jugador;
     }
 
-    public List<Jugador> traerTodosLosJugadores() throws SQLException,
+    public ArrayList<Jugador> traerTodosLosJugadores() throws SQLException,
             NamingException {
         getConexion();
 
         stmt = conn.createStatement();
 
-        ArrayList<Jugador> jugadores = new ArrayList<>();
+        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
         try {
 
-            rst = stmt.executeQuery("SELECT * FROM jugadores");
+            ps = conn.prepareStatement("SELECT * FROM jugador ORDER BY nombre");
+            rst = ps.executeQuery();
             while (rst.next()) {
                 Jugador jugador = new Jugador();
                 jugador.setIdJugador(rst.getInt(1));
@@ -123,21 +99,51 @@ public class MbdJugador extends Mbd implements java.io.Serializable {
         return jugadores;
     }
 
-    public boolean eliminaJugador(int idJugador) throws SQLException,
+    public void eliminaJugador(int idJugador) throws SQLException,
             NamingException {
         getConexion();
         stmt = conn.createStatement();
 
         try {
-            ps = conn.prepareStatement("DELETE FROM jugadores WHERE idJugador = ?");
+            ps = conn.prepareStatement("DELETE FROM jugador WHERE idJugador=?");
             ps.setInt(1, idJugador);
-            return ps.execute();
+            ps.executeUpdate();
+
         } catch (Exception e) {
             System.out.println("Error en sql: ");
-            return false;
+
         } finally {
             returnConexion(conn, ps, rst, stmt);
         }
+    }
+
+    public boolean actualizaJugador(Jugador jugador) throws SQLException,
+            NamingException {
+        getConexion();
+
+        stmt = conn.createStatement();
+
+        boolean exito = false;
+        try {
+
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+            ps = conn.prepareStatement("update jugador set "
+                    + "nombre=?, direccion=?, fecha_nacimiento=?, foto=?, idEquipo=? where idJugador=?");
+            ps.setString(1, jugador.getNombre());
+            ps.setString(2, jugador.getDireccion());
+            ps.setDate(3, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
+            ps.setString(4, jugador.getFoto());
+            ps.setInt(5, jugador.getIdJugador());
+            ps.executeUpdate();
+            exito = true;
+        } catch (SQLException e) {
+            System.out.println("Error en sql: ");
+            throw e;
+        } finally {
+            returnConexion(conn, ps, rst, stmt);
+        }
+        return exito;
     }
 
 }

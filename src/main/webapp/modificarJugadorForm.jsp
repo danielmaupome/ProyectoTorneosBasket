@@ -1,78 +1,68 @@
 <%-- 
-    Document   : agregarEquipoForm
+    Document   : modificarEquipoForm
     Created on : 25/06/2019, 03:26:33 PM
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.model.MbdJugador"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="mx.com.develop.model.MbdJugadores"%>
 <%@page import="mx.com.develop.objects.Jugador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="mx.com.develop.model.MbdEquipo"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String pIdUsuario = request.getParameter("idJugador");
-    int idJugador = Integer.parseInt(pIdUsuario);
-
-    Jugador jugador = new MbdJugador().buscaJugador(idJugador);
-    List<Equipo> equipos = new MbdEquipo().traerTodosLosEquipos();
+    String pIdJugador = request.getParameter("idJugador");
+    int idJugador = Integer.parseInt(pIdJugador);
+    Jugador jugador = new MbdJugadores().buscaJugador(idJugador);
+    String fechaDeNacimiento = new SimpleDateFormat("yyyy-MM-dd").format(jugador.getFechaDeNacimiento());
+    
+    ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Modificar Jugador - TODO</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
+        <title>Agregar Usuario - TODO</title>
+        <%@ include file="menu.jsp" %>
         <p>&nbsp;</p>
         <div id="container" class="container">
-            <form action="modificarJugadorDo.jsp?idJugador=<%=jugador.getIdJugador()%>" method="POST">
+            <form action="modificarJugadorDo.jsp?idJugador=<%=idJugador%>" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="nombre">Nombre:</label>
+                        <label for="login">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<%=jugador.getNombre()%>">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="login">Direccion:</label>
-                        <input type="text" class="form-control" id="login" name="direccion" placeholder="DirecciÃ³n" value="<%=jugador.getDireccion()%>">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="foto">Fotografia:</label>
-                        <input type="file" class="form-control" id="foto" name="foto" 
-                        accept="image/png, .jpeg, .jpg, image/gif"placeholder="Fotografia">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">Fecha de nacimiento:</label>
-                        <input type="date" class="form-control" id="email" name="fecha_nacimiento" placeholder="Fecha nacimiento" value="<%=jugador.getFechaDeNacimiento()%>">
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="<%=jugador.getDireccion()%>">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="idEquipo">Equipos:</label>
-                        <select name="idEquipo">
-                            <%
-                                for (Equipo equipo : equipos) {
-                                    out.print("<option value=\"");
-                                    out.print(equipo.getIdEquipo());
-                                    out.print("\">");
-                                    out.print(equipo.getNombre());
-                                    out.print("</option>");
-                                }
-                            %>
-                        </select> 
+                        <label for="foto">Fotografía:</label>
+                        <input type="file" class="form-control" id="foto" name="foto" placeholder="Fotografía" value="<%=jugador.getFoto()%>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha de nacimiento" value="<%=fechaDeNacimiento%>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="idEquipo">Equipo</label>
+                        <select class="form-control" id="idEquipo" name="idEquipo">
+                            <%for(Equipo equipo : listaEquipos){%>
+                            <option value="<%=equipo.getIdEquipo()%>" <%if(equipo.getIdEquipo()==jugador.getIdEquipo()){%>selected<%}%>><%=equipo.getNombre()%></option>
+                            <%}%>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

@@ -4,32 +4,29 @@
     Author     : Cesar
 --%>
 
-<%@page import="mx.com.develop.objects.Usuario"%>
-<%@page import="mx.com.develop.model.MbdUsuarios"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="mx.com.develop.objects.Equipo"%>
+<%@page import="mx.com.develop.model.MbdEquipos"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
-    String idUsuario = request.getParameter("idUsuario");
+    String pIdEquipo = request.getParameter("idEquipo");
+    int idEquipo = Integer.parseInt(pIdEquipo);
+    Equipo equipo = new MbdEquipos().buscaEquipo(idEquipo);
     
-    boolean exito = new MbdUsuarios().eliminaUsuario(Integer.parseInt(idUsuario));
+    new MbdEquipos().eliminaEquipo(idEquipo);
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Se ha eliminado un equipo</title>
-        <jsp:include page="headers.jsp"/>
-    </head>
-    <body>
-        <%if(exito){%>
+        <%@ include file="menu.jsp" %>
         <div class="jumbotron">
             <h1>Se ha eliminado un equipo</h1>
+            <p>&nbsp;</p>
+            <p><b>Nombre:</b> <%=equipo.getNombre()%></p>
+            <p><b>Logotipo:</b> <%=equipo.getLogotipo()%></p>
+            <p><b>Color primario:</b> <%=equipo.getColorPrimario()%></p>
+            <p><b>Color secundario:</b> <%=equipo.getColorSecundario()%></p>
             <p><a class="btn btn-primary btn-lg" href="equipos.jsp" role="button">Regresar</a></p>
         </div>
-        <%}else{%>
-        <div class="jumbotron">
-            <h1>Ocurrió un error al eliminar el equipo</h1>
-            <p><a class="btn btn-primary btn-lg" href="equipos.jsp" role="button">Regresar</a></p>
-        </div>
-        <%}%>
-    </body>
+        <%@ include file="base.jsp" %>
 </html>

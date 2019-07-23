@@ -14,25 +14,16 @@
 <%
     String pIdPartido = request.getParameter("idPartido");
     int idPartido = Integer.parseInt(pIdPartido);
-    String equipoLocal = request.getParameter("equipoLocal");//Recibe el id
-    String equipoVisitante = request.getParameter("equipoVisitante");
-    int estatus = Integer.parseInt(request.getParameter("estatus"));
     int marcadorLocal = Integer.parseInt(request.getParameter("marcadorLocal"));
     int marcadorVisitante = Integer.parseInt(request.getParameter("marcadorVisitante"));
-    String fecha = request.getParameter("fecha");
-    int idEquipoLocal = Integer.parseInt(equipoLocal);
-    int idEquipoVisitante = Integer.parseInt(equipoVisitante);
-    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'kk:mm");
+    int estatus = Integer.parseInt(request.getParameter("estatus"));
     
-    Partido partido = new Partido();
+    Partido partido = new MbdPartidos().buscaPartido(idPartido);
     partido.setIdPartido(idPartido);
-    partido.setEquipoLocal(idEquipoLocal);
-    partido.setEquipoVisitante(idEquipoVisitante);
-    partido.setEstatus(estatus);
     partido.setMarcadorLocal(marcadorLocal);
     partido.setMarcadorVisitante(marcadorVisitante);
-    partido.setFecha(formatoFecha.parse(fecha));
-    boolean exito = new MbdPartidos().actualizaPartido(partido);
+    partido.setEstatus(estatus);
+    boolean exito = new MbdPartidos().actualizaMarcadorPartido(partido);
     
     Hashtable<Integer, Equipo> equipos = new MbdEquipos().getEquipos();
 %>
@@ -43,10 +34,10 @@
         <%@ include file="menu.jsp" %>
         <%if(exito){%>
         <div class="jumbotron">
-            <h1>Se ha modificado un partido</h1>
+            <h1>Se ha agregado marcador al partido</h1>
             <p>&nbsp;</p>
-            <p><b><%=equipos.get(idEquipoLocal).getNombre()%></b> <%=marcadorLocal%> - <%=marcadorVisitante%> <b><%=equipos.get(idEquipoLocal).getNombre()%></b></p>
-            <p><b>Fecha:</b> <%=fecha%></p>
+            <p><b><%=equipos.get(partido.getEquipoLocal()).getNombre()%></b> <%=partido.getMarcadorLocal()%> - <%=partido.getMarcadorVisitante()%> <b><%=equipos.get(partido.getEquipoLocal()).getNombre()%></b></p>
+            <p><b>Fecha:</b> <%=partido.getFecha()%></p>
             <p><a class="btn btn-primary btn-lg" href="partidos.jsp" role="button">Regresar</a></p>
         </div>
         <%}else{%>
