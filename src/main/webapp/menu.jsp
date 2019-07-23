@@ -1,8 +1,6 @@
 <%@page import="mx.com.develop.objects.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Usuario usuarioEnSesion = (Usuario)session.getAttribute("usuarioEnSesion");
-    if(usuarioEnSesion!=null){
         %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Torneo de Basquetbol</a>
