@@ -24,22 +24,21 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Logotipo:</label>
-                        <div class="col-md-12 col-sm-12 col-xs-12 dropzone">
-
-                        </div>                        
+                        <label for="logotipo">Logotipo:</label>
+                        <input type="file" class="form-control" id="logotipo" name="logotipo" 
+                        name="foto" accept="image/png, .jpeg, .jpg, image/gif" placeholder="Logotipo">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Color Primario:</label>
-                        <input class="jscolor form-control" id="color_primario" name="color_primario" placeholder="Color Primario" value="ab2567">
+                        <label for="color_primario">Color Primario:</label>
+                        <input type="color" class="form-control" id="color_primario" name="color_primario" placeholder="Color Primario">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Color Secundario:</label>
-                        <input class="jscolor form-control" id="color_secundaria" name="color_secundaria" placeholder="Color Secundario" value="110BAB">
+                        <label for="color_secundario">Color Secundario:</label>
+                        <input type="color" class="form-control" id="color_secundario" name="color_secundario" placeholder="Color Secundario">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>

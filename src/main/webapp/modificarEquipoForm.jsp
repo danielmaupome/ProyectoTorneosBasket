@@ -32,27 +32,22 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Logotipo:</label>
-                            <div class="col-md-12 col-sm-12 col-xs-12 dropzone">
-
-                            </div>                        
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="logotipo">Logotipo:</label>
+                        <input type="file" class="form-control" id="logotipo" name="logotipo" 
+                        name="foto" accept="image/png, .jpeg, .jpg, image/gif" placeholder="Logotipo">
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="password">Color Primario: </label>
-                        <input class="jscolor form-control" id="password" name="color_primario" value="<%=equipo.getColorPrimario()%>">
+                        <label for="color_primario">Color Primario:</label>
+                        <input type="color" class="form-control" id="color_primario" name="color_primario" placeholder="Color Primario">
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="email">Color Secundario: </label>
-                        <input class="jscolor form-control" id="email" name="color_secundario" value="<%=equipo.getColorSecundario()%>">
+                        <label for="color_secundario">Color Secundario:</label>
+                        <input type="color" class="form-control" id="color_secundario" name="color_secundario" placeholder="Color Secundario">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>

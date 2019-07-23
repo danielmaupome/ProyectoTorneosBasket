@@ -43,8 +43,9 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="password">Foto:</label>
-                        <input type="file" class="form-control" id="password" name="foto" placeholder="Fotografía" value="<%=jugador.getFoto()%>">
+                        <label for="foto">Fotografia:</label>
+                        <input type="file" class="form-control" id="foto" name="foto" 
+                        accept="image/png, .jpeg, .jpg, image/gif"placeholder="Fotografia">
                     </div>
                 </div>
 
