@@ -16,6 +16,7 @@
             usuario = new MbdUsuarios().buscaUsuario(login, password);
             
             session.setAttribute("nickname", usuario.getLogin());
+            session.setAttribute("usuarioEnSesion",usuario);
         }
 %>
 <!DOCTYPE html>
