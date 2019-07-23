@@ -20,42 +20,37 @@
     <head>
         <title>Lista de equipos</title>
         <%@ include file="menu.jsp" %>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Logotipo</th>
-                    <th scope="col">Color</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%for(Equipo equipo : listaEquipos){
-                File archivoImagen=new File(uploadFolder+equipo.getLogotipo());
-                %>
-                <tr>
-                    <th scope="row"><%=equipo.getIdEquipo()%></th>
-                    <td><%=equipo.getNombre()%></td>
-                    <td><img style="display:block; width:auto;height:100px;" src="<%=ImageTools.encodeFileToBase64Binary(archivoImagen)%>" /></td>
-                    <td><div style="height:100px; width:100px; overflow:hidden; background-color:<%=equipo.getColorPrimario()%>;">
-                            <div style="width:0; height:0; border-top:100px solid <%=equipo.getColorSecundario()%>; border-right:100px solid transparent;"></div>
-                        </div>
-                    </td>
-                    <td><a class="btn btn-primary btn-lg" href="modificarEquipoForm.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Modificar</a></td>
-                    <td><a class="btn btn-primary btn-lg" href="eliminarEquipoDo.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Eliminar</a></td>
-                </tr>
-                <%}%>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><p><a class="btn btn-primary btn-lg" href="agregarEquipoForm.jsp" role="button">Agregar</a></p></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </tfoot>
-        </table>
+         <table class="table" style="font-size:14px; " scope="row">
+                <thead>
+                    <tr>
+                        <th scope ="col" class="col-lg-1 col-md-1 col-xs-1" scope="col">#</th>
+                        <th class="col-lg-2 col-md-2 col-xs-2" scope="col">Nombre</th>
+                        <th class="col-lg-2 col-md-2 col-xs-2" scope="col">Logotipo</th>
+                        <th class="col-lg-2 col-md-2 col-xs-2" scope="col">Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for (Equipo equipo : listaEquipos) {
+                            File archivoImagen = new File(uploadFolder + equipo.getLogotipo());
+                    %>
+                    <tr>
+                        <th class="col-lg-1 col-md-1 col-xs-1" scope="row"><%=equipo.getIdEquipo()%></th>
+                        <td class="col-lg-2 col-md-2 col-xs-2"><%=equipo.getNombre()%></td>
+                        <td class="col-lg-2 col-md-2 col-xs-2"><img style="display:block; width:auto;height:100px;" src="<%=ImageTools.encodeFileToBase64Binary(archivoImagen)%>" /></td>
+                        <td class="col-lg-2 col-md-2 col-xs-2"><div style="height:100px; width:100px; overflow:hidden; background-color:<%=equipo.getColorPrimario()%>;">
+                                <div style="width:0; height:0; border-top:100px solid <%=equipo.getColorSecundario()%>; border-right:100px solid transparent;"></div>
+                            </div>
+                        </td>
+                        <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="modificarEquipoForm.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Modificar</a></td>
+                        <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="eliminarEquipoDo.jsp?idEquipo=<%=equipo.getIdEquipo()%>" role="button">Eliminar</a></td>
+                    </tr>
+                    <%}%>
+                </tbody>
+                <tfoot align="center">
+                    <tr>
+                        <td><p><a class="btn btn-danger btn-lg" href="agregarEquipoForm.jsp" role="button">Agregar</a></p></td>
+                    </tr>
+                </tfoot>
+            </table>
         <%@ include file="base.jsp" %>
 </html>
