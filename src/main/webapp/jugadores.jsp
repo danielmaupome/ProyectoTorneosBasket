@@ -24,39 +24,31 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Equipo</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Fecha de Nacimiento</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Modificar</th>
-                    <th scope="col">Eliminar</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">#</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Nombre</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Direccion</th>
+                    <th class="col-lg-2 col-md-2 col-xs-2" scope="col">Fecha de Nacimiento</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Foto</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Modificar</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <%for(Jugador jugador : listaJugadores){%>
                 <tr>
-                    <th scope="row"><%=jugador.getIdJugador()%></th>
-                    <td><%=jugador.getNombre()%></td>
-                    <td><%=equipos.get(jugador.getIdEquipo()).getNombre()%></td>
-                    <td><%=jugador.getDireccion()%></td>
-                    <td><%=jugador.getFechaDeNacimiento()%></td>
-                    <td><%=jugador.getFoto()%></td>
-                    <td><a class="btn btn-primary btn-lg" href="modificarJugadorForm.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Modificar</a></td>
-                    <td><a class="btn btn-primary btn-lg" href="eliminarJugadorDo.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Eliminar</a></td>
+                    <td  class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getIdJugador()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getNombre()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getDireccion()%></td>
+                    <td class="col-lg-2 col-md-2 col-xs-2"><%=jugador.getFechaDeNacimiento()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getFoto()%></td>
+                    <td ><a class="btn btn-danger btn-lg" href="modificarJugadorForm.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Modificar</a></td>
+                    <td ><a class="btn btn-danger btn-lg" href="eliminarJugadorDo.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Eliminar</a></td>
                 </tr>
                 <%}%>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><p><a class="btn btn-primary btn-lg" href="agregarJugadorForm.jsp" role="button">Agregar</a></p></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+            <tfoot align="center">
+                    <tr>
+                    <td><p><a class="btn btn-danger btn-lg" href="agregarJugadorForm.jsp" role="button">Agregar</a></p></td>
                 </tr>
             </tfoot>
         </table>
