@@ -14,7 +14,7 @@ import java.util.Date;
 public class Bitacora {
     private int idBitacora;
     private int idUsuario;
-    private String descripcion;
+    private String url;
     private Date fecha;
 
     public int getIdBitacora() {
@@ -33,12 +33,12 @@ public class Bitacora {
         this.idUsuario = idUsuario;
     }
     
-    public String getDescripcion() {
-        return descripcion;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setUrl(String descripcion) {
+        this.url = descripcion;
     }
 
     public Date getFecha() {

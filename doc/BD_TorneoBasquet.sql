@@ -51,3 +51,12 @@ CREATE TABLE usuarios (
   estadoDeRegistro   BOOLEAN NOT NULL,
   PRIMARY KEY (idUsuario)
 );
+
+CREATE TABLE bitacoras (
+  idBitacora int(11) NOT NULL AUTO_INCREMENT,
+  idUsuario int(11) DEFAULT NULL,
+  url varchar(50) DEFAULT NULL,
+  fecha datetime NOT NULL,
+  PRIMARY KEY (idBitacora),
+  FOREIGN KEY (idUsuario) REFERENCES usuarios (idUsuario)
+ );
