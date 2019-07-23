@@ -24,7 +24,7 @@ public class MbdPartido extends Mbd implements java.io.Serializable {
 
         boolean exito = false;
         try {
-            ps = conn.prepareStatement("INSERT INTO partidos(equipo_local,equipo_visitante,Estatus,marcador_global,marcador_visitante,fecha) VALUES(?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO partidos(equipo_local,equipo_visitante,Estatus,marcador_local,marcador_visitante,fecha) VALUES(?,?,?,?,?,?)");
             ps.setInt(1, equipo.getEquipoLocal());
             ps.setInt(2, equipo.getEquipoVisitante());
             ps.setInt(3, equipo.getEstatus());
@@ -49,7 +49,7 @@ public class MbdPartido extends Mbd implements java.io.Serializable {
 
         boolean exito = false;
         try {
-            ps = conn.prepareStatement("UPDATE partidos SET equipo_local = ?, equipo_visitante = ?, Estatus = ?, marcador_global = ?, marcador_visitante = ?, fecha = ? WHERE idPartido = ?");
+            ps = conn.prepareStatement("UPDATE partidos SET equipo_local = ?, equipo_visitante = ?, Estatus = ?, marcador_local = ?, marcador_visitante = ?, fecha = ? WHERE idPartido = ?");
             ps.setInt(1, equipo.getEquipoLocal());
             ps.setInt(2, equipo.getEquipoVisitante());
             ps.setInt(3, equipo.getEstatus());
@@ -74,7 +74,7 @@ public class MbdPartido extends Mbd implements java.io.Serializable {
 
         Partido equipo = null;
         try {
-            ps = conn.prepareStatement("SELECT idPartido, equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partidos WHERE idPartido= ?");
+            ps = conn.prepareStatement("SELECT idPartido, equipo_local, equipo_visitante, Estatus, marcador_local, marcador_visitante, fecha FROM partidos WHERE idPartido= ?");
             ps.setInt(1, idPartido);
             rst = ps.executeQuery();
             if (rst.next()) {
@@ -106,7 +106,7 @@ public class MbdPartido extends Mbd implements java.io.Serializable {
 
         try {
 
-            rst = stmt.executeQuery("SELECT idPartido, equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partidos ORDER BY idPartido");
+            rst = stmt.executeQuery("SELECT idPartido, equipo_local, equipo_visitante, Estatus, marcador_local, marcador_visitante, fecha FROM partidos ORDER BY idPartido");
             while (rst.next()) {
                 Partido equipo = new Partido();
                 equipo.setIdPartido(rst.getInt(1));
