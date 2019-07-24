@@ -25,14 +25,15 @@ public class MbdPartidos extends Mbd {
             
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("YYYY-MM-dd kk:mm");
 
-            ps = conn.prepareStatement("INSERT INTO partido (equipo_local,equipo_visitante,Estatus,marcador_local,marcador_visitante,fecha) VALUES("
-                    + "?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO partido (equipo_local,equipo_visitante,Estatus,marcador_local,marcador_visitante,idCancha,fecha) VALUES("
+                    + "?,?,?,?,?,?,?)");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorLocal());
             ps.setInt(5, partido.getMarcadorVisitante());
-            ps.setDate(6, new java.sql.Date(partido.getFecha().getTime()));
+            ps.setInt(6, partido.getIdCancha());
+            ps.setDate(7, new java.sql.Date(partido.getFecha().getTime()));
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -63,7 +64,8 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setIdCancha(rst.getInt(7));
+                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
             }
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
@@ -93,7 +95,8 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setIdCancha(rst.getInt(7));
+                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,7 +128,8 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setIdCancha(rst.getInt(7));
+                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
@@ -186,14 +190,15 @@ public class MbdPartidos extends Mbd {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("YYYY-MM-dd kk:mm");
             
             ps = conn.prepareStatement("update partido set equipo_local=?,equipo_visitante=?,"
-                    + "Estatus=?,marcador_local=?,marcador_visitante=?,fecha=? where idPartido=?");
+                    + "Estatus=?,marcador_local=?,marcador_visitante=?,idCancha=?,fecha=? where idPartido=?");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorLocal());
             ps.setInt(5, partido.getMarcadorVisitante());
-            ps.setDate(6, new java.sql.Date(partido.getFecha().getTime()));
-            ps.setInt(7, partido.getIdPartido());
+            ps.setInt(6, partido.getIdCancha());
+            ps.setDate(7, new java.sql.Date(partido.getFecha().getTime()));
+            ps.setInt(8, partido.getIdPartido());
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -312,7 +317,8 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setIdCancha(rst.getInt(7));
+                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
