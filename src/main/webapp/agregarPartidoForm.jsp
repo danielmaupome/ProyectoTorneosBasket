@@ -4,12 +4,15 @@
     Author     : Cesar
 --%>
 
+<%@page import="mx.com.develop.model.MbdCanchas"%>
+<%@page import="mx.com.develop.objects.Cancha"%>
 <%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
     ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
+    ArrayList<Cancha> listaCanchas = new MbdCanchas().traerCanchas();
 %>
 <!DOCTYPE html>
 <html>
@@ -43,6 +46,20 @@
                     <div class="form-group col-md-6">
                         <label for="fecha">Fecha:</label>
                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="Fecha:">
+                    </div>
+                </div>
+                        <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cancha">Cancha:</label>
+                        <select class="form-control" id="equipo_visitante" name="cancha">
+                            <option value="" >Seleccione una Cancha</option>
+                            <%for(Cancha can : listaCanchas){%>
+                                <option value="<%=can.getIdCancha()%>" 
+                                    > 
+                                    <%=can.getDescripcion()%>
+                                </option>
+                            <%}%> 
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
