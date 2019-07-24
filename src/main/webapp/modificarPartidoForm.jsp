@@ -4,6 +4,8 @@
     Author     : Cesar
 --%>
 
+<%@page import="mx.com.develop.model.MbdCanchas"%>
+<%@page import="mx.com.develop.objects.Cancha"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="mx.com.develop.model.MbdEquipos"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
@@ -17,6 +19,7 @@
 
     Partido partido = new MbdPartidos().buscaPartido(idPartido);
     ArrayList<Equipo> listaEquipos = new MbdEquipos().traerTodosLosEquipos();
+    ArrayList<Cancha> listaCanchas = new MbdCanchas().traerCanchas();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 %>
 <!DOCTYPE html>
@@ -76,7 +79,21 @@
                         <input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="Fecha" value="<%=formatoFecha.format(partido.getFecha())%>">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="cancha">Cancha:</label>
+                        <select class="form-control" id="equipo_visitante" name="cancha">
+                            <option value="" >Seleccione una Cancha</option>
+                            <%for(Cancha can : listaCanchas){%>
+                                <option value="<%=can.getIdCancha()%>" 
+                                    > 
+                                    <%=can.getDescripcion()%>
+                                </option>
+                            <%}%> 
+                        </select>
+                    </div>
+                </div> 
+                <button type="submit" class="btn btn-danger btn-lg">Guardar</button>
             </form>
         </div>
         <%@ include file="base.jsp" %>
