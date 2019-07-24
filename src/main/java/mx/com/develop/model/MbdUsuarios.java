@@ -130,7 +130,7 @@ public class MbdUsuarios extends Mbd {
         stmt = conn.createStatement();
 
         try {
-            ps = conn.prepareStatement("DELETE FROM usuario WHERE idUsuario=" + idUsuario);
+            ps = conn.prepareStatement("DELETE FROM usuario WHERE idUsuario=?");
             ps.setInt(1, idUsuario);
             ps.executeUpdate();
 

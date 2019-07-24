@@ -33,8 +33,9 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="foto">Fotografía:</label>
-                        <input type="file" class="form-control" id="foto" name="foto" placeholder="Fotografía">
+                        <label for="foto">Fotografia:</label>
+                        <input type="file" class="form-control" id="foto" name="foto" 
+                        accept="image/png, .jpeg, .jpg, image/gif"placeholder="Fotografia">
                     </div>
                 </div>
                 <div class="form-row">

@@ -37,7 +37,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<%=usuario.getPassword()%>">
+                        <input type="password" class="form-control" id="password" name="password" 
+                        pattern="(?=.*\d).{6,}" title="Debe contener 6 o mas caracteres, y al menos un numero" placeholder="Password">
                     </div>
                 </div>
 

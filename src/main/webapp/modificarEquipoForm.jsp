@@ -30,7 +30,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="logotipo">Logotipo:</label>
-                        <input type="file" class="form-control" id="logotipo" name="logotipo" placeholder="Logotipo" value="<%=equipo.getLogotipo()%>">
+                        <input type="file" class="form-control" id="logotipo" name="logotipo" 
+                        name="foto" accept="image/png, .jpeg, .jpg, image/gif" placeholder="Logotipo">
                     </div>
                 </div>
                 <div class="form-row">
