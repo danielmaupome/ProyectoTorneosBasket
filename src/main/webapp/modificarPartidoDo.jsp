@@ -19,6 +19,8 @@
     int estatus = Integer.parseInt(request.getParameter("estatus"));
     int marcadorLocal = Integer.parseInt(request.getParameter("marcadorLocal"));
     int marcadorVisitante = Integer.parseInt(request.getParameter("marcadorVisitante"));
+    String cancha=request.getParameter("cancha");
+    int idCancha = Integer.parseInt(cancha);
     String fecha = request.getParameter("fecha");
     int idEquipoLocal = Integer.parseInt(equipoLocal);
     int idEquipoVisitante = Integer.parseInt(equipoVisitante);
@@ -28,6 +30,7 @@
     partido.setIdPartido(idPartido);
     partido.setEquipoLocal(idEquipoLocal);
     partido.setEquipoVisitante(idEquipoVisitante);
+    partido.setIdCancha(idCancha);
     partido.setEstatus(estatus);
     partido.setMarcadorLocal(marcadorLocal);
     partido.setMarcadorVisitante(marcadorVisitante);
