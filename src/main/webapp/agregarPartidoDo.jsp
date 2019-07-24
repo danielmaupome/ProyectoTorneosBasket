@@ -43,7 +43,7 @@
         <div class="jumbotron">
             <h1>Se ha agregado un partido</h1>
             <p>&nbsp;</p>
-            <p><b><%=equipos.get(idEquipoLocal).getNombre()%></b> vs <b><%=equipos.get(idEquipoLocal).getNombre()%></b></p>
+            <p><b><%=equipos.get(idEquipoLocal).getNombre()%></b> vs <b><%=equipos.get(idEquipoVisitante).getNombre()%></b></p>
             <p><b>Fecha:</b> <%=fecha%></p>
             <p><a class="btn btn-primary btn-lg" href="partidos.jsp" role="button">Regresar</a></p>
         </div>
