@@ -15,7 +15,7 @@ public class Partido {
     private int idPartido;
     private int equipoLocal;
     private int equipoVisitante;
-    private int estatus; //Pendiente de jugarse, Jugado, Default)
+    private String estatus; //Pendiente de jugarse, Jugado, Default)
     private int marcadorLocal;
     private int marcadorVisitante;
     private int idCancha;
@@ -45,11 +45,11 @@ public class Partido {
         this.equipoVisitante = equipoVisitante;
     }
 
-    public int getEstatus() {
+    public String getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(int estatus) {
+    public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
 

@@ -21,7 +21,7 @@
     Hashtable<Integer, Equipo> equipos = new MbdEquipos().getEquipos();
     Hashtable<Integer, Cancha> canchas = new MbdCanchas().getCanchas();
     
-String[] estatus = {"","Pendiente","Jugado","Ganó local por default","Ganó visitante por default"};
+//String[] estatus = {"","Pendiente","Jugado","Ganó local por default","Ganó visitante por default"};
 
 %>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ String[] estatus = {"","Pendiente","Jugado","Ganó local por default","Ganó visit
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=partido.getMarcadorLocal()%></td>
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=equipos.get(partido.getEquipoVisitante()).getNombre()%></td>
                         <td class="col-lg-2 col-md-2 col-xs-2"><%=partido.getMarcadorVisitante()%></td>
-                        <td class="col-lg-1 col-md-1 col-xs-1"><%=estatus[partido.getEstatus()]%></td>
+                        <td class="col-lg-1 col-md-1 col-xs-1"><%=partido.getEstatus()%></td>
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=canchas.get(partido.getIdCancha()).getDescripcion()%></td>
                         <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="modificarPartidoForm.jsp?idPartido=<%=partido.getIdPartido()%>" role="button">Modificar</a></td>
                         <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="eliminarPartidoDo.jsp?idPartido=<%=partido.getIdPartido()%>" role="button">Eliminar</a></td>

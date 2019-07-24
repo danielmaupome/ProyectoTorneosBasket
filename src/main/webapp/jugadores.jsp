@@ -28,7 +28,7 @@
                     <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Nombre</th>
                     <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Direccion</th>
                     <th class="col-lg-2 col-md-2 col-xs-2" scope="col">Fecha de Nacimiento</th>
-                    <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Foto</th>
+                    <th class="col-lg-3 col-md-3 col-xs-3" scope="col">Foto</th>
                     <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Modificar</th>
                     <th class="col-lg-1 col-md-1 col-xs-1" scope="col">Eliminar</th>
                 </tr>
@@ -40,7 +40,7 @@
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getNombre()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getDireccion()%></td>
                     <td class="col-lg-2 col-md-2 col-xs-2"><%=jugador.getFechaDeNacimiento()%></td>
-                    <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getFoto()%></td>
+                    <td class="col-lg-3 col-md-3 col-xs-3"><%=jugador.getFoto()%></td>
                     <td ><a class="btn btn-danger btn-lg" href="modificarJugadorForm.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Modificar</a></td>
                     <td ><a class="btn btn-danger btn-lg" href="eliminarJugadorDo.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Eliminar</a></td>
                 </tr>
