@@ -17,6 +17,8 @@
     String fecha = request.getParameter("fecha");
     int idEquipoLocal = Integer.parseInt(equipoLocal);
     int idEquipoVisitante = Integer.parseInt(equipoVisitante);
+    String cancha=request.getParameter("cancha");
+    int idCancha = Integer.parseInt(cancha);
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd'T'kk:mm");
     
     Partido partido = new Partido();
@@ -25,6 +27,7 @@
     partido.setEstatus(1);//Donde 1 representa Pendiente de jugar
     partido.setMarcadorLocal(0);//Inicialmente no hay marcador
     partido.setMarcadorVisitante(0);
+    partido.setIdCancha(idCancha);
     partido.setFecha(formatoFecha.parse(fecha));
 
     boolean exito = new MbdPartidos().insertaPartido(partido);
