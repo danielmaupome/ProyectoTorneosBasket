@@ -18,6 +18,7 @@ public class Partido {
     private int estatus; //Pendiente de jugarse, Jugado, Default)
     private int marcadorLocal;
     private int marcadorVisitante;
+    private int idCancha;
     private Date fecha;
 
     public int getIdPartido() {
@@ -67,6 +68,16 @@ public class Partido {
     public void setMarcadorVisitante(int marcadorVisitante) {
         this.marcadorVisitante = marcadorVisitante;
     }
+
+    public int getIdCancha() {
+        return idCancha;
+    }
+
+    public void setIdCancha(int idCancha) {
+        this.idCancha = idCancha;
+    }
+    
+    
 
     public Date getFecha() {
         return fecha;
