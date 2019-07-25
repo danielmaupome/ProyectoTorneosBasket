@@ -88,6 +88,7 @@
                                 <li><a href="jugadores.jsp">Jugadores</a></li>
                                 <li><a href="partidos.jsp">Partidos</a></li>
                                 <li><a href="usuarios.jsp">Usuarios</a>
+                                <li><a href="bitacoraForm.jsp">Bitacora</a>
                             </ul>
                         </nav>
                         <ul class="social list-inline">

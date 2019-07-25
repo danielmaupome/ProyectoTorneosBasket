@@ -20,25 +20,25 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Login</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Modificar</th>
-                    <th scope="col">Eliminar</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">#</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Nombre</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Login</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Password</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Correo</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Modificar</th>
+                    <th class="col-lg-1 col-md-1 col-xs-1">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <%for(Usuario usuario : listaUsuarios){%>
                 <tr>
-                    <th scope="row"><%=usuario.getIdUsuario()%></th>
-                    <td><%=usuario.getNombre()%></td>
-                    <td><%=usuario.getLogin()%></td>
-                    <td><%=usuario.getPassword()%></td>
-                    <td><%=usuario.getEmail()%></td>
-                    <td><a class="btn btn-primary btn-lg" href="modificarUsuarioForm.jsp?idUsuario=<%=usuario.getIdUsuario()%>" role="button">Modificar</a></td>
-                    <td><a class="btn btn-primary btn-lg" href="eliminarUsuarioDo.jsp?idUsuario=<%=usuario.getIdUsuario()%>" role="button">Eliminar</a></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getIdUsuario()%></th>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getNombre()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getLogin()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getPassword()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getEmail()%></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><a class="btn btn-primary btn-lg" href="modificarUsuarioForm.jsp?idUsuario=<%=usuario.getIdUsuario()%>" role="button">Modificar</a></td>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><a class="btn btn-primary btn-lg" href="eliminarUsuarioDo.jsp?idUsuario=<%=usuario.getIdUsuario()%>" role="button">Eliminar</a></td>
                 </tr>
                 <%}%>
             </tbody>
