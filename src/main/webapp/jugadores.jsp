@@ -4,16 +4,16 @@
     Author     : Cesar
 --%>
 
-<%@page import="java.util.Hashtable"%>
-<%@page import="mx.com.develop.model.MbdEquipos"%>
-<%@page import="mx.com.develop.objects.Equipo"%>
 <%@page import="mx.com.develop.model.MbdJugadores"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="mx.com.develop.objects.Jugador"%>
+<%@page import="java.util.ResourceBundle"%>
+<%@page import="java.io.File"%>
+<%@page import="mx.com.develop.tools.ImageTools"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
     ArrayList<Jugador> listaJugadores = new MbdJugadores().traerTodosLosJugadores();
-    Hashtable<Integer, Equipo> equipos = new MbdEquipos().getEquipos();
+    String uploadFolder = ResourceBundle.getBundle("mx.com.develop.properties.rutas").getString("rutaArchivos");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,13 +35,15 @@
                 </tr>
             </thead>
             <tbody>
-                <%for(Jugador jugador : listaJugadores){%>
+                <%for(Jugador jugador : listaJugadores){
+                File archivoImagen=new File(uploadFolder+jugador.getFoto());
+                %>
                 <tr>
                     <td  class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getIdJugador()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getNombre()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=jugador.getDireccion()%></td>
                     <td class="col-lg-2 col-md-2 col-xs-2"><%=jugador.getFechaDeNacimiento()%></td>
-                    <td class="col-lg-3 col-md-3 col-xs-3"><%=jugador.getFoto()%></td>
+                    <td class="col-lg-2 col-md-2 col-xs-2"><img style="display:block; width:auto;height:70px;" src="<%=ImageTools.encodeFileToBase64Binary(archivoImagen)%>" /></td>
                     
                     <td ><a class="btn btn-danger btn-lg" href="modificarJugadorForm.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Modificar</a></td>
                     <td ><a class="btn btn-danger btn-lg" href="eliminarJugadorDo.jsp?idJugador=<%=jugador.getIdJugador()%>" role="button">Eliminar</a></td>

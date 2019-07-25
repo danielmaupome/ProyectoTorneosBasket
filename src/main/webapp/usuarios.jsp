@@ -32,7 +32,7 @@
             <tbody>
                 <%for(Usuario usuario : listaUsuarios){%>
                 <tr>
-                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getIdUsuario()%></th>
+                    <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getIdUsuario()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getNombre()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getLogin()%></td>
                     <td class="col-lg-1 col-md-1 col-xs-1"><%=usuario.getPassword()%></td>

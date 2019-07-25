@@ -23,11 +23,12 @@ public class MbdJugadores extends Mbd {
 
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
-            ps = conn.prepareStatement("INSERT INTO jugador (nombre,direccion,fecha_nacimiento,foto,idEquipo) VALUES(?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO jugador (nombre,direccion,fecha_nacimiento,foto,idEquipo) VALUES(?,?,?,?,?)");
             ps.setString(1, jugador.getNombre());
             ps.setString(2, jugador.getDireccion());
             ps.setDate(3, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
             ps.setString(4, jugador.getFoto());
+            ps.setInt(5, jugador.getIdEquipo());
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -128,14 +129,15 @@ public class MbdJugadores extends Mbd {
 
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
 
-            ps = conn.prepareStatement("update jugador set "
-                    + "nombre=?, direccion=?, fecha_nacimiento=?, foto=?, idEquipo=? where idJugador=?");
-            ps.setString(1, jugador.getNombre());
-            ps.setString(2, jugador.getDireccion());
-            ps.setDate(3, new java.sql.Date(jugador.getFechaDeNacimiento().getTime()));
-            ps.setString(4, jugador.getFoto());
-            ps.setInt(5, jugador.getIdJugador());
-            ps.executeUpdate();
+             ps = conn.prepareStatement("UPDATE jugador SET nombre=? , direccion=? , fecha_nacimiento=? , "
+                    + "idEquipo=? , foto=? WHERE idJugador=?");
+                ps.setString(1, jugador.getNombre());
+                ps.setString(2, jugador.getDireccion());
+                ps.setObject(3, jugador.getFechaDeNacimiento());
+                ps.setInt(4, jugador.getIdEquipo());
+                ps.setString(5, jugador.getFoto());
+                ps.setInt(6, jugador.getIdJugador());
+                ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
