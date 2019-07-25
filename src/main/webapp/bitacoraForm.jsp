@@ -38,13 +38,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <title>Bitacora</title>
-        <script type="text/javascript">
-            function alertName() {
-                if (document.form.idUsuario.value == "") {
-                }
-                alert("elije un usuario");
-            }
-        </script>
     </head>
     <body>
         <h1>Bitacora</h1>
