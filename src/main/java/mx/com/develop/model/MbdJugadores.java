@@ -84,11 +84,11 @@ public class MbdJugadores extends Mbd {
             while (rst.next()) {
                 Jugador jugador = new Jugador();
                 jugador.setIdJugador(rst.getInt(1));
-                jugador.setIdEquipo(rst.getInt(2));
-                jugador.setNombre(rst.getString(3));
-                jugador.setDireccion(rst.getString(4));
-                jugador.setFechaDeNacimiento(rst.getDate(5));
-                jugador.setFoto(rst.getString(6));
+                jugador.setDireccion(rst.getString(2));
+                jugador.setFechaDeNacimiento(rst.getDate(3));
+                jugador.setFoto(rst.getString(4));
+                jugador.setNombre(rst.getString(5));
+                jugador.setIdEquipo(rst.getInt(6));
                 jugadores.add(jugador);
             }
         } catch (SQLException e) {
@@ -149,3 +149,4 @@ public class MbdJugadores extends Mbd {
     }
 
 }
+
