@@ -363,7 +363,8 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getString(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setIdCancha(rst.getInt(7));
+                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
