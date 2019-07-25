@@ -25,20 +25,28 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="equipoLocal">Equipo Local</label>
-                        <select class="form-control" id="equipoLocal" name="equipoLocal">
-                            <%for (Equipo equipo : listaEquipos) {%>
-                            <option value="<%=equipo.getIdEquipo()%>"><%=equipo.getNombre()%></option>
+                        <select class="form-control" id="idEquipo1" name="equipoLocal">
+                            <option value="">Seleccione el equipo local</option>
+                            <%for(Equipo equipo : listaEquipos){%>
+                            <option value="<%=equipo.getIdEquipo()%>" >
+                                    <%=equipo.getNombre()%>
+                                </option>
                             <%}%>
+                          
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="equipoVisitante">Equipo Visitante</label>
-                        <select class="form-control" id="equipoVisitante" name="equipoVisitante">
-                            <%for (Equipo equipo : listaEquipos) {%>
-                            <option value="<%=equipo.getIdEquipo()%>"><%=equipo.getNombre()%></option>
+                        <select class="form-control" id="idEquipo2" name="equipoVisitante">
+                            <option value="">Seleccione el equipo visitante</option>
+                            <%for(Equipo equipo : listaEquipos){%>
+                            <option value="<%=equipo.getIdEquipo()%>" >
+                                    <%=equipo.getNombre()%>
+                                </option>
                             <%}%>
+                          
                         </select>
                     </div>
                 </div>
@@ -51,14 +59,14 @@
                         <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cancha">Cancha:</label>
-                        <select class="form-control" id="equipo_visitante" name="cancha">
-                            <option value="" >Seleccione una Cancha</option>
+                        <select class="form-control" id="idEquipo2" name="cancha">
+                            <option value="">Seleccione la cancha</option>
                             <%for(Cancha can : listaCanchas){%>
                                 <option value="<%=can.getIdCancha()%>" 
                                     > 
                                     <%=can.getDescripcion()%>
                                 </option>
-                            <%}%> 
+                            <%}%>
                         </select>
                     </div>
                 </div>

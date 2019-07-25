@@ -13,6 +13,7 @@
 <%@page import="mx.com.develop.model.MbdPartidos"%>
 <%@page import="mx.com.develop.objects.Partido"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.Date"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%
     ArrayList<Partido> listaPartidos = new MbdPartidos().traerTodosLosPartidos();
@@ -48,13 +49,13 @@
                 <tbody>
                     <%for (Partido partido : listaPartidos) {%>
                     <tr>
-                        <td class="col-lg-2 col-md-2 col-xs-2"><%=partido.getFecha().toGMTString() %></td>
+                        <td class="col-lg-2 col-md-2 col-xs-2"><%=formatoFecha.format(partido.getFecha()) %></td>
                         <!--<td class="col-lg-1 col-md-1 col-xs-1">partido.getIdPartido()</td>-->
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=equipos.get(partido.getEquipoLocal()).getNombre()%></td>
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=partido.getMarcadorLocal()%></td>
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=equipos.get(partido.getEquipoVisitante()).getNombre()%></td>
                         <td class="col-lg-2 col-md-2 col-xs-2"><%=partido.getMarcadorVisitante()%></td>
-                        <td class="col-lg-1 col-md-1 col-xs-1"><%=partido.getEstatus()%></td>
+                        <td class="col-lg-1 col-md-1 col-xs-1"><%=partido.getEs()%></td>
                         <td class="col-lg-1 col-md-1 col-xs-1"><%=canchas.get(partido.getIdCancha()).getDescripcion()%></td>
                         <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="modificarPartidoForm.jsp?idPartido=<%=partido.getIdPartido()%>" role="button">Modificar</a></td>
                         <td class="col-xs-1"><a class="btn btn-danger btn-lg" href="eliminarPartidoDo.jsp?idPartido=<%=partido.getIdPartido()%>" role="button">Eliminar</a></td>

@@ -22,11 +22,11 @@ public class MbdEquipos extends Mbd {
         try {
 
             ps = conn.prepareStatement("INSERT INTO equipo (idCategoria,nombre,logotipo,color_primario,color_secundario) VALUES(?,?,?,?,?)");
-            ps.setInt(2, equipo.getIdCategoria());
-            ps.setString(3, equipo.getNombre());
-            ps.setString(4, equipo.getLogotipo());
-            ps.setString(5, equipo.getColorPrimario());
-            ps.setString(6, equipo.getColorSecundario());
+            ps.setInt(1, equipo.getIdCategoria());
+            ps.setString(2, equipo.getNombre());
+            ps.setString(3, equipo.getLogotipo());
+            ps.setString(4, equipo.getColorPrimario());
+            ps.setString(5, equipo.getColorSecundario());
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -173,6 +173,7 @@ public class MbdEquipos extends Mbd {
         return exito;
     }
 
+    
     public Hashtable<Integer, Equipo> getEquipos() throws SQLException,
             NamingException {
         getConexion();
@@ -183,6 +184,7 @@ public class MbdEquipos extends Mbd {
 
         try {
 
+            //rst = stmt.executeQuery("SELECT * FROM equipo ORDER BY nombre");
             ps = conn.prepareStatement("SELECT * FROM equipo ORDER BY nombre");
             rst = ps.executeQuery();
             while (rst.next()) {
@@ -203,7 +205,7 @@ public class MbdEquipos extends Mbd {
         }
         return equipos;
     }
-
+    
     public int obtenerPuntosEquipo(int idEquipo) throws SQLException,
             NamingException {
         int puntos = 0;
@@ -383,3 +385,4 @@ public class MbdEquipos extends Mbd {
         return equiposConPuntos;
     }
 }
+

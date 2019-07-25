@@ -29,7 +29,7 @@ public class MbdPartidos extends Mbd {
                     + "?,?,?,?,?,?,?)");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
-            ps.setString(3, partido.getEstatus());
+            ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorLocal());
             ps.setInt(5, partido.getMarcadorVisitante());
             ps.setInt(6, partido.getIdCancha());
@@ -61,11 +61,11 @@ public class MbdPartidos extends Mbd {
                 partido.setIdPartido(rst.getInt(1));
                 partido.setEquipoLocal(rst.getInt(2));
                 partido.setEquipoVisitante(rst.getInt(3));
-                partido.setEstatus(rst.getString(4));
+                partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
                 partido.setIdCancha(rst.getInt(7));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
+               partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
             }
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
@@ -92,11 +92,11 @@ public class MbdPartidos extends Mbd {
                 partido.setIdPartido(rst.getInt(1));
                 partido.setEquipoLocal(rst.getInt(2));
                 partido.setEquipoVisitante(rst.getInt(3));
-                partido.setEstatus(rst.getString(4));
+                partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
                 partido.setIdCancha(rst.getInt(7));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
+                partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,11 +125,11 @@ public class MbdPartidos extends Mbd {
                 partido.setIdPartido(rst.getInt(1));
                 partido.setEquipoLocal(rst.getInt(2));
                 partido.setEquipoVisitante(rst.getInt(3));
-                partido.setEstatus(rst.getString(4));
+                partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
                 partido.setIdCancha(rst.getInt(7));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
+                partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
@@ -193,7 +193,7 @@ public class MbdPartidos extends Mbd {
                     + "Estatus=?,marcador_local=?,marcador_visitante=?,idCancha=?,fecha=? where idPartido=?");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
-            ps.setString(3, partido.getEstatus());
+            ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorLocal());
             ps.setInt(5, partido.getMarcadorVisitante());
             ps.setInt(6, partido.getIdCancha());
@@ -222,7 +222,7 @@ public class MbdPartidos extends Mbd {
                     + "marcador_visitante=?,Estatus=? where idPartido=?");
             ps.setInt(1, partido.getMarcadorLocal());
             ps.setInt(2, partido.getMarcadorVisitante());
-            ps.setString(3, partido.getEstatus());
+            ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getIdPartido());
             ps.executeUpdate();
             exito = true;
@@ -314,11 +314,11 @@ public class MbdPartidos extends Mbd {
                 partido.setIdPartido(rst.getInt(1));
                 partido.setEquipoLocal(rst.getInt(2));
                 partido.setEquipoVisitante(rst.getInt(3));
-                partido.setEstatus(rst.getString(4));
+                partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
                 partido.setIdCancha(rst.getInt(7));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(8).getTime()));
+                partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
@@ -360,10 +360,10 @@ public class MbdPartidos extends Mbd {
                 partido.setIdPartido(rst.getInt(1));
                 partido.setEquipoLocal(rst.getInt(2));
                 partido.setEquipoVisitante(rst.getInt(3));
-                partido.setEstatus(rst.getString(4));
+                partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorLocal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setFecha(new java.util.Date(rst.getTimestamp(7).getTime()));
+                partido.setFecha(new java.sql.Date(rst.getTimestamp(7).getTime()));
                 partidos.add(partido);
             }
         } catch (SQLException e) {
@@ -408,3 +408,4 @@ public class MbdPartidos extends Mbd {
     }
 
 }
+
