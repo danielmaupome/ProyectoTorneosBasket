@@ -36,7 +36,7 @@
     <head>
         <title>Se ha eliminado un equipo</title>
         <%@ include file="menu.jsp" %>
-        <%            ArrayList<Jugador> listaJugadores = new MbdJugadores().traerTodosLosJugador();
+        <%            ArrayList<Jugador> listaJugadores = new MbdJugadores().traerTodosLosJugadores();
             for (Jugador jugador : listaJugadores) {
                 if (idEquipo == jugador.getIdEquipo()) {
                     jugadores++;
