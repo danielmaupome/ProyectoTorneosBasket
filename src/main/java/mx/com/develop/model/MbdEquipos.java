@@ -21,11 +21,12 @@ public class MbdEquipos extends Mbd {
         boolean exito = false;
         try {
 
-            ps = conn.prepareStatement("INSERT INTO equipo (nombre,logotipo,color_primario,color_secundario) VALUES(?,?,?,?)");
-            ps.setString(1, equipo.getNombre());
-            ps.setString(2, equipo.getLogotipo());
-            ps.setString(3, equipo.getColorPrimario());
-            ps.setString(4, equipo.getColorSecundario());
+            ps = conn.prepareStatement("INSERT INTO equipo (idCategoria,nombre,logotipo,color_primario,color_secundario) VALUES(?,?,?,?,?)");
+            ps.setInt(2, equipo.getIdCategoria());
+            ps.setString(3, equipo.getNombre());
+            ps.setString(4, equipo.getLogotipo());
+            ps.setString(5, equipo.getColorPrimario());
+            ps.setString(6, equipo.getColorSecundario());
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -51,10 +52,11 @@ public class MbdEquipos extends Mbd {
             if (rst.next()) {
                 equipo = new Equipo();
                 equipo.setIdEquipo(rst.getInt(1));
-                equipo.setNombre(rst.getString(2));
-                equipo.setLogotipo(rst.getString(3));
-                equipo.setColorPrimario(rst.getString(4));
-                equipo.setColorSecundario(rst.getString(5));
+                equipo.setIdCategoria(rst.getInt(2));
+                equipo.setNombre(rst.getString(3));
+                equipo.setLogotipo(rst.getString(4));
+                equipo.setColorPrimario(rst.getString(5));
+                equipo.setColorSecundario(rst.getString(6));
             }
         } catch (SQLException e) {
             System.out.println("Error en sql: ");
@@ -79,10 +81,11 @@ public class MbdEquipos extends Mbd {
             if (rst.next()) {
                 equipo = new Equipo();
                 equipo.setIdEquipo(rst.getInt(1));
-                equipo.setNombre(rst.getString(2));
-                equipo.setLogotipo(rst.getString(3));
-                equipo.setColorPrimario(rst.getString(4));
-                equipo.setColorSecundario(rst.getString(5));
+                equipo.setIdCategoria(rst.getInt(2));
+                equipo.setNombre(rst.getString(3));
+                equipo.setLogotipo(rst.getString(4));
+                equipo.setColorPrimario(rst.getString(5));
+                equipo.setColorSecundario(rst.getString(6));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,10 +112,11 @@ public class MbdEquipos extends Mbd {
             while (rst.next()) {
                 Equipo equipo = new Equipo();
                 equipo.setIdEquipo(rst.getInt(1));
-                equipo.setNombre(rst.getString(2));
-                equipo.setLogotipo(rst.getString(3));
-                equipo.setColorPrimario(rst.getString(4));
-                equipo.setColorSecundario(rst.getString(5));
+                equipo.setIdCategoria(rst.getInt(2));
+                equipo.setNombre(rst.getString(3));
+                equipo.setLogotipo(rst.getString(4));
+                equipo.setColorPrimario(rst.getString(5));
+                equipo.setColorSecundario(rst.getString(6));
                 equipos.add(equipo);
             }
         } catch (SQLException e) {
@@ -133,7 +137,6 @@ public class MbdEquipos extends Mbd {
             ps = conn.prepareStatement("DELETE FROM equipo WHERE idEquipo=?");
             ps.setInt(1, idEquipo);
             ps.executeUpdate();
-
         } catch (Exception e) {
             System.out.println("Error en sql: ");
 
@@ -152,12 +155,13 @@ public class MbdEquipos extends Mbd {
         try {
 
             ps = conn.prepareStatement("update equipo set "
-                    + "nombre=?,logotipo=?,color_primario=?,color_secundario=? where idEquipo=?");
-            ps.setString(1, equipo.getNombre());
-            ps.setString(2, equipo.getLogotipo());
-            ps.setString(3, equipo.getColorPrimario());
-            ps.setString(4, equipo.getColorSecundario());
-            ps.setInt(5, equipo.getIdEquipo());
+                    + "idCategoria=?,nombre=?,logotipo=?,color_primario=?,color_secundario=? where idEquipo=?");
+            ps.setInt(1, equipo.getIdCategoria());
+            ps.setString(2, equipo.getNombre());
+            ps.setString(3, equipo.getLogotipo());
+            ps.setString(4, equipo.getColorPrimario());
+            ps.setString(5, equipo.getColorSecundario());
+            ps.setInt(6, equipo.getIdEquipo());
             ps.executeUpdate();
             exito = true;
         } catch (SQLException e) {
@@ -184,10 +188,11 @@ public class MbdEquipos extends Mbd {
             while (rst.next()) {
                 Equipo equipo = new Equipo();
                 equipo.setIdEquipo(rst.getInt(1));
-                equipo.setNombre(rst.getString(2));
-                equipo.setLogotipo(rst.getString(3));
-                equipo.setColorPrimario(rst.getString(4));
-                equipo.setColorSecundario(rst.getString(5));
+                equipo.setIdCategoria(rst.getInt(2));
+                equipo.setNombre(rst.getString(3));
+                equipo.setLogotipo(rst.getString(4));
+                equipo.setColorPrimario(rst.getString(5));
+                equipo.setColorSecundario(rst.getString(6));
                 equipos.put(equipo.getIdEquipo(), equipo);
             }
         } catch (SQLException e) {
@@ -277,10 +282,11 @@ public class MbdEquipos extends Mbd {
             while (rst.next()) {
                 Equipo equipo = new Equipo();
                 equipo.setIdEquipo(rst.getInt(1));
-                equipo.setNombre(rst.getString(2));
-                equipo.setLogotipo(rst.getString(3));
-                equipo.setColorPrimario(rst.getString(4));
-                equipo.setColorSecundario(rst.getString(5));
+                equipo.setIdCategoria(rst.getInt(2));
+                equipo.setNombre(rst.getString(3));
+                equipo.setLogotipo(rst.getString(4));
+                equipo.setColorPrimario(rst.getString(5));
+                equipo.setColorSecundario(rst.getString(6));
                 equipos.add(equipo);
             }
 
